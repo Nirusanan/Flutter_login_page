@@ -36,9 +36,22 @@ class _MyHomePageState extends State<MyHomePage> {
   bool visible = false;
   
   
-void login (){
-  print(emailController.text);
-  print(passwordController.text);
+void login() async {
+  String email = emailController.text;
+  String password = passwordController.text;
+
+  // SERVER LOGIN API URL
+    var url = 'http://192.168.1.6/login';
+
+    // Store all data with Param Name.
+    var data = {'email': email, 'password': password};
+
+    // // Starting Web API Call.
+     var response = await http.post(url, body: json.encode(data));
+
+    var message = jsonDecode(response.body);
+    print(message);
+
   
 
 }

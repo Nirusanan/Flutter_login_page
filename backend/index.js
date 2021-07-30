@@ -1,12 +1,15 @@
 const express = require('express')
-const bodyParser = require('body-parser')
 var mysql = require('mysql')
 const app = express()
 const port = 3000
 
-//Here we are configuring express to use body-parser as middle-ware.
-app.use(bodyParser.urlencoded({ extended: false }));
+
+const bodyParser  = require('body-parser');
+
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+
 
 
 var connection = mysql.createConnection({
@@ -23,16 +26,16 @@ app.post('/login', (request, response) => {
     let password = request.body.password;
     console.log(username);
     if (username && password) {
-        connection.query('SELECT * FROM flutter_login WHERE UserName = ? AND password = ?', [username, password], function (error, results, fields) {
+        connection.query('SELECT * FROM flutter_login WHERE UserName = ? AND Password = ?', [username, password], function (error, results, fields) {
             if (results.length > 0) {
-                response.json({ 'msg': 'Sucessfull' });
+                response.send('success');
             } else {
-                response.json({ 'msg': 'Incorrect' });
+                response.send("Not successful");
             }
             response.end();
         });
     } else {
-        response.json({ 'msg': 'Not valid' });
+        response.send("Not valid");
         response.end();
     }
 });
