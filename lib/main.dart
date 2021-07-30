@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 void main() {
   runApp(MyApp());
@@ -33,6 +34,14 @@ class _MyHomePageState extends State<MyHomePage> {
   String uname = '';
   String pwd = '';
   bool visible = false;
+  
+  
+void login (){
+  print(emailController.text);
+  print(passwordController.text);
+  
+
+}
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   textColor: Colors.white,
                   color: Colors.blue,
                   child: Text('Login'),
-                  onPressed: () => print("hello"),
+                  onPressed: login,
                 )),
             Container(
                 height: 50,
